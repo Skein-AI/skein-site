@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skein</title>
+  <meta name="description" content="Skein is the human orchestration layer for teams running coding agents. It settles what the team has already decided, and sends the rest to the one person who should decide.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p class="mark">Skein</p>
+      <h1>The human orchestration layer for teams running coding agents.</h1>
+      <p class="lede">It settles what the team has already decided, and sends the rest to the one person who should decide.</p>
+    </header>
+
+    <section aria-labelledby="life">
+      <h2 id="life">A blocker's life</h2>
+
+      <article class="blocker">
+        <p class="ask"><span class="who">Agent</span> Should a missing permission return 403 or 404?</p>
+        <p>The team's API guidelines and two past PR reviews say 404, to avoid leaking that a resource exists. API conventions are inside the team's boundary. Skein answers <strong>404</strong>, cites the guideline and the reviews, and logs it.</p>
+        <p class="outcome">Nobody was interrupted.</p>
+      </article>
+
+      <article class="blocker">
+        <p class="ask"><span class="who">Agent</span> The v1 endpoint has three callers left. Remove it in this PR?</p>
+        <p>Nothing in the record covers removing a public endpoint, and deprecations are outside the boundary. Skein sends it to the API's owner, not the channel, with the agent's context and the deprecation policy. The owner answers in one line. Skein unblocks the agent and records the decision.</p>
+        <p class="outcome">The next removal question cites it.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="works">
+      <h2 id="works">Works with the agents you already run</h2>
+      <p>Claude Code, Cursor, anything that speaks MCP. An agent that is stuck calls one tool, <code>ask_skein</code>, and gets back an answer with a citation, or the answer of the one person who owns the question.</p>
+    </section>
+
+    <section aria-labelledby="install">
+      <h2 id="install">Install in three steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Run one server for the team</h3>
+          <p>Put your team's decisions, the boundary of what Skein may settle alone, and who owns what in three plain files in your repo. <code>skein init</code> drafts them from your docs, CODEOWNERS and past PR reviews; your team corrects the draft. Connect Slack, then start the server.</p>
+        </li>
+        <li>
+          <h3>Commit one config file</h3>
+          <p>Add <code>.mcp.json</code> to your repo, pointing at the server. It holds no secrets.</p>
+        </li>
+        <li>
+          <h3>Each developer sets one secret</h3>
+          <p>No keys, no tokens, no install on their machine. Their agents can ask Skein from the next session.</p>
+        </li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>Skein is in early testing with teams that run several coding agents per engineer.</p>
+    </footer>
+  </main>
+</body>
+</html>
